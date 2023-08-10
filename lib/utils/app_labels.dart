@@ -13,4 +13,5 @@ class AppLabels {
   static String proceedToPay = "Proceed to pay";
   static String somethingWentWrong = "Something went wrong";
   static String selectSeats = "Select Seats";
+  static String noDataFound = "No Data Found";
 }

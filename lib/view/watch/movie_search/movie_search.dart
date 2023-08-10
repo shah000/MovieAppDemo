@@ -75,7 +75,7 @@ class _MovieSearchState extends State<MovieSearch> {
           )),
       body: SafeArea(
           child: searchQuery == ''
-              ? const Center(child: Text("Not Data Found"))
+              ? Center(child: Text(AppLabels.noDataFound))
               : Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FutureBuilder<SearchMovieModel>(

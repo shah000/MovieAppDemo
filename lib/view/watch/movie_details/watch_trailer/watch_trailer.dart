@@ -4,13 +4,15 @@ import 'package:get/get.dart';
 import 'package:movieapp/controller/movie_controller.dart';
 import 'package:movieapp/model/movie/movie_video_model.dart';
 import 'package:movieapp/utils/app_colors.dart';
+import 'package:movieapp/utils/app_labels.dart';
 import 'package:movieapp/utils/navigator.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../../widgets/loading_dialog.dart';
+import '../../../widgets/custom_loading.dart';
 
 class WatchTrailer extends StatefulWidget {
   const WatchTrailer({super.key, required this.moiveId});
+
   final int moiveId;
 
   @override
@@ -19,15 +21,6 @@ class WatchTrailer extends StatefulWidget {
 
 class _WatchTrailerState extends State<WatchTrailer> {
   final controller = Get.put(MovieController());
-
-  @override
-  void initState() {
-    super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-    ]);
-  }
 
   @override
   dispose() {
@@ -41,11 +34,20 @@ class _WatchTrailerState extends State<WatchTrailer> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.black,
-        title: const Text('Watch Trailer'),
+        title: Text(AppLabels.watchTrailer),
       ),
       backgroundColor: Colors.transparent,
       body: SafeArea(
@@ -53,11 +55,7 @@ class _WatchTrailerState extends State<WatchTrailer> {
         future: controller.getMovieTrailer(movieId: widget.moiveId),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return const LoadingDialog();
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Text("data"),
-            );
+            return const CustomLoading();
           } else {
             MovieVideolModel? movieVideos = snapshot.data;
             final specificTrailer = movieVideos!.results.firstWhere(

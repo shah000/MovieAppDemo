@@ -15,7 +15,7 @@ import '../../../utils/constants.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_labels.dart';
 import '../../../utils/date_format.dart';
-import '../../widgets/loading_dialog.dart';
+import '../../widgets/custom_loading.dart';
 import 'watch_trailer/watch_trailer.dart';
 import 'widgets/genres_and_overview.dart';
 
@@ -38,7 +38,7 @@ class _MovieDetailState extends State<MovieDetail> {
         builder: (context, snapshot) {
           MovieDetailModel? movies = snapshot.data;
           if (!snapshot.hasData) {
-            return const LoadingDialog();
+            return const CustomLoading();
           } else {
             return SingleChildScrollView(
               child: Column(

@@ -10,9 +10,9 @@ import 'package:movieapp/utils/app_size.dart';
 import 'package:movieapp/utils/navigator.dart';
 import 'package:movieapp/view/watch/movie_details/movie_detail.dart';
 import 'package:movieapp/view/watch/movie_search/movie_search.dart';
-import 'package:movieapp/view/widgets/loading_dialog.dart';
 
 import '../widgets/custom_bottom_navigation_bar.dart';
+import '../widgets/custom_loading.dart';
 
 class WatchScreen extends StatefulWidget {
   const WatchScreen({super.key});
@@ -23,10 +23,6 @@ class WatchScreen extends StatefulWidget {
 
 class _WatchScreenState extends State<WatchScreen> {
   final controller = Get.put(MovieController());
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +56,7 @@ class _WatchScreenState extends State<WatchScreen> {
                     builder: (context, snapshot) {
                       MovieModel? movies = snapshot.data;
                       if (!snapshot.hasData) {
-                        return const LoadingDialog();
+                        return const CustomLoading();
                       } else {
                         return SizedBox(
                           width: AppSize.width(context),
